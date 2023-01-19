@@ -3,8 +3,7 @@
 </script>
 
 <template>
-  suka
-<a-calendar></a-calendar>
+<router-view></router-view>
 </template>
 
 <style scoped>

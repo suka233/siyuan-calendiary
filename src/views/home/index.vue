@@ -41,20 +41,6 @@ const panelChangeFn = (date: Dayjs) => {
 };
 
 // TODO 从保存在本页的配置文件中读取配置
-// 获取目前展示的日期
-// 发送sql请求获取当页需要的日记列表
-//  SELECT * FROM blocks WHERE hpath LIKE '%daily note%' AND type = 'd' AND content LIKE '%-__-%' AND content LIKE '2023-01%'
-
-// 发送sql请求获取日记列表的详细信息：content: image span, subtype: h1,
-//  SELECT * FROM blocks WHERE hpath LIKE '%daily note%' AND root_id = '20230117175253-prfgimc' OR root_id = 'xxx'
-
-// 组件内部整理数据并渲染
-//  整理数据[{
-//   date: '2023-01-17',
-//   title: 'xxx',
-//   image: 'xxx',
-//   tag: 'xxx',
-//  }]
 </script>
 
 <style scoped></style>

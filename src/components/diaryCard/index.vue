@@ -13,7 +13,7 @@
                 {{ props.current.format('DD') }}
             </div>
             <a-popover v-else :title="title"
-                ><div>
+                ><div class="truncate">
                     {{ title ? title : props.current.format('YYYY-MM-DD') }}
                 </div></a-popover
             >

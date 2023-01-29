@@ -15,12 +15,14 @@
         <!--            {{ value }}-->
         <!--        </template>-->
     </a-calendar>
+    <setting-btn></setting-btn>
 </template>
 
 <script setup lang="ts">
 import DiaryCard from '/@/components/diaryCard/index.vue';
 import { onMounted, ref } from 'vue';
 import { Dayjs } from 'dayjs';
+import SettingBtn from '/@/components/settingBtn/index.vue';
 
 const selectedDate = ref();
 const calenderRef = ref();

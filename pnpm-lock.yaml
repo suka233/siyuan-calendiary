@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@ant-design/icons-vue': ^6.1.0
   '@types/node': ^18.11.18
   '@typescript-eslint/eslint-plugin': ^5.48.2
   '@typescript-eslint/parser': ^5.0.0
@@ -22,6 +23,7 @@ specifiers:
   windicss: ^3.5.6
 
 dependencies:
+  '@ant-design/icons-vue': 6.1.0_vue@3.2.45
   ant-design-vue: 3.2.15_vue@3.2.45
   dayjs: 1.11.7
   pinia: 2.0.29_prq2uz4lho2pwp6irk4cfkrxwu

@@ -1,11 +1,11 @@
 <template>
-    <div class="dairy-card" @click="clickFn">
+    <div class="diary-card" @click="clickFn">
         <!--      该日期无日记-->
-        <div v-if="!diaryDate" class="no-dairy">
+        <div v-if="!diaryDate" class="no-diary">
             {{ props.current.format('DD') }}
         </div>
         <!--      该日期有日记-->
-        <div v-else class="has-dairy">
+        <div v-else class="has-diary">
             <div
                 v-if="imgPath"
                 :style="{ backgroundImage: `url('${imgPath}')` }"
@@ -139,21 +139,21 @@ watch(
 </script>
 
 <style scoped>
-.dairy-card {
+.diary-card {
     background-color: rgba(236, 236, 236, 0.4);
     height: 100px;
     margin: 10px;
     font-size: large;
     font-weight: bold;
 }
-.dairy-card:hover {
+.diary-card:hover {
     background-color: rgba(236, 236, 236, 1);
 }
-.no-dairy {
+.no-diary {
     text-align: center;
     line-height: 100px;
 }
-.has-dairy {
+.has-diary {
     text-align: center;
     line-height: 100px;
     background-color: #175488;

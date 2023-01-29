@@ -2,18 +2,19 @@
   "name": "siyuan-diarium",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "eslint-comment": "使用eslint检查代码并自动修复src目录下所有拓展名为.js .vue的文件",
-    "eslint": "eslint --ext .js,.ts,.vue --ignore-path .gitignore --fix src",
+    "eslint": "eslint --ext .js,.ts,.vue --ignore-path .eslintignore --fix src",
+    "lint:eslint": "eslint --cache --max-warnings 0  \"{src,mock}/**/*.{vue,ts,tsx}\" --fix",
     "prettier:comment": "使用prettier格式化代码当前目录的所有文件",
     "prettier": "prettier --write"
   },
   "dependencies": {
     "ant-design-vue": "^3.2.15",
+    "dayjs": "^1.11.7",
     "pinia": "^2.0.29",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"

@@ -1,11 +1,13 @@
 <script setup lang="ts">
-
+import zhCN from 'ant-design-vue/es/locale/zh_CN';
+import dayjs from 'dayjs';
+import 'dayjs/locale/zh-cn';
+import Home from '/@/views/home/index.vue';
+dayjs.locale('zh-cn');
 </script>
 
 <template>
-<router-view></router-view>
+    <a-config-provider :locale="zhCN"> <Home /></a-config-provider>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

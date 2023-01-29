@@ -12,17 +12,17 @@ module.exports = {
         ecmaVersion: 2020,
         sourceType: 'module',
         ecmaFeatures: {
-            jsx: true
-        }
+            jsx: true,
+        },
     },
 
     extends: [
         'plugin:vue/vue3-recommended',
         'plugin:@typescript-eslint/recommended',
         'prettier',
-        'plugin:prettier/recommended'
+        'plugin:prettier/recommended',
     ],
     rules: {
         // override/add rules settings here, such as:
-    }
+    },
 };

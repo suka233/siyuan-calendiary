@@ -157,7 +157,7 @@ watch(
 <style scoped>
 .diary-card {
     background-color: rgba(236, 236, 236, 0.4);
-    height: 100px;
+    height: 6vw;
     margin: 10px;
     font-size: large;
     font-weight: bold;
@@ -167,11 +167,11 @@ watch(
 }
 .no-diary {
     text-align: center;
-    line-height: 100px;
+    line-height: 6vw;
 }
 .has-diary {
     text-align: center;
-    line-height: 100px;
+    line-height: 6vw;
     background-color: #175488;
     color: #e5e5e5;
 }

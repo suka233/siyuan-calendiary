@@ -30,17 +30,21 @@ export const usePublicStore = defineStore('app-public', () => {
 
     const queryDiaryListSQL = `SELECT * FROM blocks WHERE hpath LIKE '%daily note%' AND type = 'd' AND content LIKE '%-__-%'`;
     const refreshDiaryList = async () => {
-        querySql(queryDiaryListSQL).then((res: any) => {
-            diaryList.value = res?.data;
-            diaryNotebookId.value = res?.data[0]?.box;
-            diaryHpathHead.value = res?.data[0]?.hpath.split('/')[1];
-            diaryTitleList.value = [];
-            Object.assign(diaryIdObj, {});
-            diaryList.value.forEach((item) => {
-                diaryTitleList.value.push(item.content);
-                diaryIdObj[item.content] = item.id;
+        querySql(queryDiaryListSQL)
+            .then((res: any) => {
+                diaryList.value = res?.data;
+                diaryNotebookId.value = res?.data[0]?.box;
+                diaryHpathHead.value = res?.data[0]?.hpath.split('/')[1];
+                diaryTitleList.value = [];
+                Object.assign(diaryIdObj, {});
+                diaryList.value.forEach((item) => {
+                    diaryTitleList.value.push(item.content);
+                    diaryIdObj[item.content] = item.id;
+                });
+            })
+            .catch((e) => {
+                console.log(`初始化public store错误：${e}`);
             });
-        });
     };
 
     refreshDiaryList().catch((err) => {

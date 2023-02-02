@@ -7,6 +7,7 @@ function pathResolve(dir: string) {
 }
 // https://vitejs.dev/config/
 export default defineConfig({
+    base: './',
     resolve: {
         alias: [
             {
@@ -22,6 +23,15 @@ export default defineConfig({
                 target: 'http://127.0.0.1:6806',
                 changeOrigin: true,
                 rewrite: (path) => path.replace(/^\/api/, '/api/'),
+            },
+        },
+    },
+    build: {
+        rollupOptions: {
+            output: {
+                entryFileNames: 'js/[name].[hash].js',
+                chunkFileNames: 'js/[name].[hash].js',
+                assetFileNames: '[ext]/[name].[hash].[ext]',
             },
         },
     },

@@ -20,3 +20,12 @@ export async function 向思源请求数据(url: string, data: any) {
     });
     return resData;
 }
+
+// 获取挂件所在块信息
+export function getWidgetBlockInfo() {
+    const id =
+        window.frameElement?.parentElement?.parentElement?.dataset.nodeId;
+    return {
+        id, //挂件块id
+    };
+}

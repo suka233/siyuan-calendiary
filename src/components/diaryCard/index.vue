@@ -1,5 +1,5 @@
 <template>
-    <div class="diary-card" @click="clickFn">
+    <a class="diary-card" :href="href" target="_self" @click="clickFn">
         <!--      该日期无日记-->
         <div v-if="!diaryDate" class="no-diary truncate">
             {{ title ? title : props.current.format('DD') }}
@@ -18,7 +18,7 @@
                 </div>
             </card-popover>
         </div>
-    </div>
+    </a>
 </template>
 
 <script lang="ts">
@@ -63,15 +63,13 @@ const regex = /\((.+?)\)/g;
 const imgPath = ref('');
 const title = ref('');
 const tags = ref<string[]>([]);
+const href = ref('');
 const clickFn = async () => {
     // 有id则打开该日记，无id则新建日记
     if (diaryIdObj.value[diaryDate.value]) {
         // 打开该条日记
         // window.open(`siyuan://blocks/${diaryIdObj.value[diaryDate.value]}`);
-        // href.value = `siyuan://blocks/${diaryIdObj.value[diaryDate.value]}`;
-        window.location.href = `siyuan://blocks/${
-            diaryIdObj.value[diaryDate.value]
-        }`;
+        href.value = `siyuan://blocks/${diaryIdObj.value[diaryDate.value]}`;
     } else {
         // 新建日记
         let newDiaryId = '';

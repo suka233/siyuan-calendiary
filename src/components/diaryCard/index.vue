@@ -1,5 +1,5 @@
 <template>
-    <a class="diary-card" :href="href" target="_self" @click="clickFn">
+    <div class="diary-card" @click="clickFn">
         <!--      该日期无日记-->
         <div v-if="!diaryDate" class="no-diary truncate">
             {{ title ? title : props.current.format('DD') }}
@@ -18,7 +18,7 @@
                 </div>
             </card-popover>
         </div>
-    </a>
+    </div>
 </template>
 
 <script lang="ts">
@@ -63,13 +63,29 @@ const regex = /\((.+?)\)/g;
 const imgPath = ref('');
 const title = ref('');
 const tags = ref<string[]>([]);
-const href = ref('');
+// const href = ref('');
+function jump(id, callback = null) {
+    // console.log('jump:', id);
+    const editor = document.querySelector(
+        'div.protyle-wysiwyg div[data-node-id] div[contenteditable][spellcheck]',
+    );
+    if (editor) {
+        let ref = document.createElement('span');
+        ref.setAttribute('data-type', 'block-ref');
+        ref.setAttribute('data-subtype', 's');
+        ref.setAttribute('data-id', id);
+        editor.appendChild(ref);
+        ref.click();
+        ref.remove();
+        if (typeof callback === 'function') setTimeout(callback, 0);
+    } else setTimeout(() => jump(id, callback), 0);
+}
 const clickFn = async () => {
     // 有id则打开该日记，无id则新建日记
     if (diaryIdObj.value[diaryDate.value]) {
         // 打开该条日记
         // window.open(`siyuan://blocks/${diaryIdObj.value[diaryDate.value]}`);
-        href.value = `siyuan://blocks/${diaryIdObj.value[diaryDate.value]}`;
+        jump(diaryIdObj.value[diaryDate.value]);
     } else {
         // 新建日记
         let newDiaryId = '';

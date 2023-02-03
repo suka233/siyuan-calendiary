@@ -64,28 +64,28 @@ const imgPath = ref('');
 const title = ref('');
 const tags = ref<string[]>([]);
 // const href = ref('');
-function jump(id, callback = null) {
-    // console.log('jump:', id);
-    const editor = document.querySelector(
-        'div.protyle-wysiwyg div[data-node-id] div[contenteditable][spellcheck]',
+function focalize(id, callback = null) {
+    // console.log('focalize:', id);
+    const breadcrumbs = document.querySelector(
+        '.protyle-breadcrumb>.protyle-breadcrumb__bar',
     );
-    if (editor) {
-        let ref = document.createElement('span');
-        ref.setAttribute('data-type', 'block-ref');
-        ref.setAttribute('data-subtype', 's');
-        ref.setAttribute('data-id', id);
-        editor.appendChild(ref);
-        ref.click();
-        ref.remove();
-        if (typeof callback === 'function') setTimeout(callback, 0);
-    } else setTimeout(() => jump(id, callback), 0);
+    if (breadcrumbs) {
+        let crumb = document.createElement('span');
+        crumb.className = 'protyle-breadcrumb__item';
+        crumb.setAttribute('data-node-id', id);
+        breadcrumbs.appendChild(crumb);
+        crumb.click();
+        // crumb.dispatchEvent(CTRL_CLICK_EVENT);
+        crumb.remove();
+        if (typeof callback === 'function') setTimeout(callback, 20);
+    } else setTimeout(() => focalize(id, callback), 20);
 }
 const clickFn = async () => {
     // 有id则打开该日记，无id则新建日记
     if (diaryIdObj.value[diaryDate.value]) {
         // 打开该条日记
         // window.open(`siyuan://blocks/${diaryIdObj.value[diaryDate.value]}`);
-        jump(diaryIdObj.value[diaryDate.value]);
+        focalize(diaryIdObj.value[diaryDate.value]);
     } else {
         // 新建日记
         let newDiaryId = '';

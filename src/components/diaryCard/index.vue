@@ -64,11 +64,14 @@ const imgPath = ref('');
 const title = ref('');
 const tags = ref<string[]>([]);
 const clickFn = async () => {
-    console.log('clickFn');
     // 有id则打开该日记，无id则新建日记
     if (diaryIdObj.value[diaryDate.value]) {
         // 打开该条日记
-        window.open(`siyuan://blocks/${diaryIdObj.value[diaryDate.value]}`);
+        // window.open(`siyuan://blocks/${diaryIdObj.value[diaryDate.value]}`);
+        // href.value = `siyuan://blocks/${diaryIdObj.value[diaryDate.value]}`;
+        window.location.href = `siyuan://blocks/${
+            diaryIdObj.value[diaryDate.value]
+        }`;
     } else {
         // 新建日记
         let newDiaryId = '';
@@ -161,6 +164,7 @@ watch(
     margin: 1px;
     font-size: large;
     font-weight: bold;
+    display: block;
 }
 .diary-card:hover {
     background-color: rgba(236, 236, 236, 1);

@@ -158,7 +158,7 @@ watch(
 .diary-card {
     background-color: rgba(236, 236, 236, 0.4);
     height: 6vw;
-    margin: 10px;
+    margin: 1px;
     font-size: large;
     font-weight: bold;
 }

@@ -29,9 +29,9 @@ export default defineConfig({
     build: {
         rollupOptions: {
             output: {
-                entryFileNames: 'js/[name].[hash].js',
+                entryFileNames: 'js/[name].js',
                 chunkFileNames: 'js/[name].[hash].js',
-                assetFileNames: '[ext]/[name].[hash].[ext]',
+                assetFileNames: '[ext]/[name].[ext]',
                 dir: 'siyuan-Calendiary',
             },
         },

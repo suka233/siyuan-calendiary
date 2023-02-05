@@ -1,7 +1,17 @@
 import { defineStore } from 'pinia';
 import { reactive, ref } from 'vue';
 import { querySql } from '/@/api/public';
+import { getWidgetBlockInfo } from '/@/utils';
 export const usePublicStore = defineStore('app-public', () => {
+    // 挂件所在块id
+    const blockID = ref<string>('');
+    // 挂件默认查询的笔记本idArray
+    const selectedNotebookId = ref<string>('');
+
+    const { id, selectedNotebookId: selectedId } = getWidgetBlockInfo();
+    blockID.value = id;
+    selectedNotebookId.value = selectedId;
+
     // 所有的日记列表
     const diaryList = ref<any[]>([]);
     // 日记标题数组
@@ -12,7 +22,6 @@ export const usePublicStore = defineStore('app-public', () => {
     const diaryNotebookId = ref<string>('');
     // 日记所在的hpath头部
     const diaryHpathHead = ref<string>('');
-
     // 已经渲染的日记init事件对象，方便按需刷新
     const diaryInitEventObj = reactive({});
 

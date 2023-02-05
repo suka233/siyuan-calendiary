@@ -1,3 +1,5 @@
+import { IWidgetBlockAttr } from './types';
+
 export async function 向思源请求数据(url: string, data: any) {
     let resData = null;
     await fetch(url, {
@@ -22,10 +24,14 @@ export async function 向思源请求数据(url: string, data: any) {
 }
 
 // 获取挂件所在块信息
-export function getWidgetBlockInfo() {
-    const id =
-        window.frameElement?.parentElement?.parentElement?.dataset.nodeId;
+export const getWidgetBlockInfo = (): IWidgetBlockAttr => {
+    const blockNode = window.frameElement?.parentElement?.parentElement;
+    const id = blockNode?.getAttribute('data-node-id') || '';
+    const selectedNotebookId =
+        blockNode?.getAttribute('data-selected-notebook-id') || '';
+
     return {
-        id, //挂件块id
+        id,
+        selectedNotebookId,
     };
-}
+};

@@ -1,6 +1,6 @@
 import { IWidgetBlockAttr } from './types';
 
-export async function 向思源请求数据(url: string, data: any) {
+export async function 向思源请求数据(url: string, data: any): Promise<any> {
     let resData = null;
     await fetch(url, {
         body: JSON.stringify(data),
@@ -15,7 +15,7 @@ export async function 向思源请求数据(url: string, data: any) {
             resData = response.json();
             // return resData = response.json()
             // return response.json()
-            return;
+            return resData;
         }
         const error_msg = `API错误:(${url})${response.status} ${response.statusText}`;
         console.error(error_msg);

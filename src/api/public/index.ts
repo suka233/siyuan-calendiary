@@ -1,4 +1,6 @@
 import { 向思源请求数据 } from '/@/utils';
+import { ISetBlockAttrsParam } from './types';
+export * from './types';
 
 /**
  * api
@@ -12,6 +14,10 @@ enum Api {
     OpenNotebook = '/api/notebook/openNotebook',
     CreateNotebook = '/api/notebook/createNotebook',
     CreateDocWithMd = '/api/filetree/createDocWithMd',
+    ListNotebook = '/api/notebook/lsNotebooks',
+    GetNotebookConf = '/api/notebook/getNotebookConf',
+    GetBlockAttrs = '/api/attr/getBlockAttrs',
+    SetBlockAttrs = '/api/attr/setBlockAttrs',
 }
 
 /**
@@ -59,4 +65,32 @@ export const createDocWithMd = (
         path,
         markdown,
     });
+};
+
+/**
+ * 列出笔记本
+ */
+export const listNotebook = () => {
+    return 向思源请求数据(Api.ListNotebook, {});
+};
+
+/**
+ * 获取笔记本配置
+ */
+export const getNotebookConf = (notebookId) => {
+    return 向思源请求数据(Api.GetNotebookConf, { notebook: notebookId });
+};
+
+/**
+ * 获取块属性
+ */
+export const getBlockAttrs = (id) => {
+    return 向思源请求数据(Api.GetBlockAttrs, { id });
+};
+
+/**
+ * 设置块属性
+ */
+export const setBlockAttrs = (params: ISetBlockAttrsParam) => {
+    return 向思源请求数据(Api.SetBlockAttrs, params);
 };

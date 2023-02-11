@@ -18,11 +18,22 @@
     <setting-btn></setting-btn>
 </template>
 
+<script lang="ts">
+export default {
+    name: 'CalendiaryHome',
+};
+</script>
+
 <script setup lang="ts">
 import DiaryCard from '/@/components/diaryCard/index.vue';
 import { ref } from 'vue';
 import { Dayjs } from 'dayjs';
 import SettingBtn from '/@/components/settingBtn/index.vue';
+import { getWidgetBlockInfo } from '/@/utils';
+import { message } from 'ant-design-vue';
+import { usePublicStore } from '/@/store/modules/public';
+const publicStore = usePublicStore();
+const { refreshDiaryList, pushDiaryInitEvent } = publicStore;
 
 const selectedDate = ref();
 const calenderRef = ref();
@@ -39,7 +50,24 @@ const panelChangeFn = (date: Dayjs) => {
     console.log(`panelChangeFn:${date}`);
 };
 
-// TODO 从保存在本页的配置文件中读取配置
+const init = async () => {
+    // 读取配置信息
+    const { id, selectedNotebookId } = getWidgetBlockInfo();
+    if (selectedNotebookId) {
+        // 选择了笔记本
+    } else {
+        // 没有选择笔记本
+        message.info(
+            '检测到未选择笔记本，将自动查询出所有默认格式的日记进行展示哦~',
+        );
+    }
+
+    await refreshDiaryList().catch((e) => {
+        console.log(e);
+    });
+};
+
+await init();
 </script>
 
 <style scoped></style>

@@ -102,6 +102,7 @@ const tags = ref<string[]>([]);
 const icon = ref('');
 const titleImgPath = ref('');
 const init = async () => {
+    title.value = '';
     if (diaryIdObj.value[diaryDate.value]) {
         const diary = await Diary.build(diaryIdObj.value[diaryDate.value]);
         tags.value = diary.tags;
@@ -109,8 +110,6 @@ const init = async () => {
         titleImgCSS.value = diary.titleImgCSS;
         titleImgPath.value = diary.titleImgPath;
         icon.value = diary.icon;
-    } else {
-        title.value = '';
     }
 };
 

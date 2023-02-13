@@ -1,10 +1,7 @@
 <template>
-    <a-popover placement="topRight" title="设置">
-        <template #content>
-            <a-button type="primary" @click="refreshFn">刷新</a-button>
-        </template>
-        <setting-outlined class="setting-btn" @click="showSettingPanelFn" />
-    </a-popover>
+    <setting-popover>
+        <setting-outlined class="setting-btn" />
+    </setting-popover>
 </template>
 
 <script lang="ts">
@@ -14,21 +11,8 @@ export default {
 </script>
 
 <script setup lang="ts">
-import { ref } from 'vue';
 import { SettingOutlined } from '@ant-design/icons-vue';
-import { usePublicStore } from '/@/store/modules/public';
-const publicStore = usePublicStore();
-const { refreshDiaryList, refreshDiaryInitEvent } = publicStore;
-
-const showSettingPanel = ref(false);
-const showSettingPanelFn = () => {
-    showSettingPanel.value = true;
-};
-
-const refreshFn = async () => {
-    await refreshDiaryList();
-    await refreshDiaryInitEvent();
-};
+import SettingPopover from './components/settingPopover/index.vue';
 </script>
 
 <style scoped>

@@ -27,6 +27,8 @@ export const usePublicStore = defineStore('app-public', () => {
     };
 
     // 所有的日记数据数组
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     const diaryDataArr = ref<typeof ISQLAllDiaryResponse.data>([]);
     // 日记标题数组
     const diaryTitleList = ref<string[]>([]);

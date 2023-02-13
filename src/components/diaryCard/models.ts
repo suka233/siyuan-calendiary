@@ -157,29 +157,60 @@ export class Diary {
 
     // 跳转到指定的diary
     static gotoDiary(id) {
-        const main_window = window.document;
-        const virtual_link = main_window.createElement('a');
-        virtual_link.setAttribute('href', `siyuan://blocks/${id}`);
-        document.body.appendChild(virtual_link);
-        const click_event = main_window.createEvent('MouseEvents');
-        click_event.initMouseEvent(
-            'click',
-            true,
-            false,
-            window,
-            0,
-            0,
-            0,
-            0,
-            0,
-            false,
-            false,
-            false,
-            false,
-            0,
-            null,
-        );
-        virtual_link.dispatchEvent(click_event);
-        virtual_link.remove();
+        if (window != window.parent) {
+            const main_window = window.parent.document;
+            const virtual_link = main_window.createElement('span');
+            virtual_link.setAttribute('data-type', 'block-ref');
+            virtual_link.setAttribute('data-id', id);
+            const temp = main_window.querySelector(
+                '.protyle-wysiwyg div[data-node-id] div[contenteditable]',
+            );
+            temp!.appendChild(virtual_link);
+            const click_event = main_window.createEvent('MouseEvents');
+            click_event.initMouseEvent(
+                'click',
+                true,
+                false,
+                window,
+                0,
+                0,
+                0,
+                0,
+                0,
+                false,
+                false,
+                false,
+                false,
+                0,
+                null,
+            );
+            virtual_link.dispatchEvent(click_event);
+            virtual_link.remove();
+        } else {
+            const main_window = window.document;
+            const virtual_link = main_window.createElement('a');
+            virtual_link.setAttribute('href', `siyuan://blocks/${id}`);
+            document.body.appendChild(virtual_link);
+            const click_event = main_window.createEvent('MouseEvents');
+            click_event.initMouseEvent(
+                'click',
+                true,
+                false,
+                window,
+                0,
+                0,
+                0,
+                0,
+                0,
+                false,
+                false,
+                false,
+                false,
+                0,
+                null,
+            );
+            virtual_link.dispatchEvent(click_event);
+            virtual_link.remove();
+        }
     }
 }

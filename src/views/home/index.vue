@@ -33,7 +33,7 @@ import { getWidgetBlockInfo } from '/@/utils';
 import { message } from 'ant-design-vue';
 import { usePublicStore } from '/@/store/modules/public';
 const publicStore = usePublicStore();
-const { refreshDiaryList } = publicStore;
+const { refreshDiaryList, refreshDiaryInitEvent } = publicStore;
 
 const selectedDate = ref();
 const calenderRef = ref();
@@ -42,8 +42,10 @@ const calenderRef = ref();
 
 // endregion
 
-const changeFn = (date: Dayjs) => {
+const changeFn = async (date: Dayjs) => {
     console.log(`changeFn:${date}`);
+    await refreshDiaryList();
+    await refreshDiaryInitEvent();
 };
 
 const panelChangeFn = (date: Dayjs) => {

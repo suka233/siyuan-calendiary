@@ -23,6 +23,7 @@ export class Diary {
     imgArr: string[];
     tags: string[];
     icon: string;
+    titleImgPath: string;
 
     private constructor({ blocks, assets, attr }) {
         this.icon = attr.icon;
@@ -33,9 +34,13 @@ export class Diary {
         const { title } = Diary.getTitle({ blocks, attr });
         this.title = title;
 
-        const { titleImgCSS, imgArr } = Diary.getTitleImage({ attr, assets });
+        const { titleImgCSS, imgArr, titleImgPath } = Diary.getTitleImage({
+            attr,
+            assets,
+        });
         this.titleImgCSS = titleImgCSS;
         this.imgArr = imgArr;
+        this.titleImgPath = titleImgPath;
     }
 
     // async 获取当日的日记列表

@@ -7,7 +7,7 @@
         <!--      该日期有日记-->
         <div v-else class="has-diary">
             <card-popover :title="title" :tags="tags">
-                <div :style="`${imgPath}`">
+                <div :style="`${titleImgCSS}`">
                     <emoji-icon :icon-unicode="icon"></emoji-icon>
                     <span class="!truncate w-10rem">{{ diaryTitle }}</span>
                 </div>
@@ -58,7 +58,7 @@ const diaryDate = computed(() => {
 
 // 计算该条日记的标题
 const diaryTitle = computed(() => {
-    if (imgPath.value) {
+    if (titleImgPath.value) {
         return title.value ? title.value : props.current.format('DD');
     } else {
         return title.value ? title.value : props.current.format('YYYY-MM-DD');
@@ -96,17 +96,21 @@ const clickFn = async () => {
     }
 };
 
-const imgPath = ref('');
+const titleImgCSS = ref('');
 const title = ref('');
 const tags = ref<string[]>([]);
 const icon = ref('');
+const titleImgPath = ref('');
 const init = async () => {
     if (diaryIdObj.value[diaryDate.value]) {
         const diary = await Diary.build(diaryIdObj.value[diaryDate.value]);
         tags.value = diary.tags;
         title.value = diary.title;
-        imgPath.value = diary.titleImgCSS;
+        titleImgCSS.value = diary.titleImgCSS;
+        titleImgPath.value = diary.titleImgPath;
         icon.value = diary.icon;
+    } else {
+        title.value = '';
     }
 };
 

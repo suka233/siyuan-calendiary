@@ -24,7 +24,7 @@ export class Diary {
     tags: string[];
     icon: string;
 
-    constructor({ blocks, assets, attr }) {
+    private constructor({ blocks, assets, attr }) {
         this.icon = attr.icon;
 
         const { tags } = Diary.getTags(blocks);
@@ -39,7 +39,7 @@ export class Diary {
     }
 
     // async 获取当日的日记列表
-    static async build(id) {
+    public static async build(id) {
         // 根据id获取block信息
         const { data: blocks } = await querySql(
             this.diaryListSQL(id, 'blocks'),
@@ -100,12 +100,12 @@ export class Diary {
         });
 
         // 如果没有，就获取第一个块的内容
-        if (!title.trim()) {
+        if (!title) {
             title = blocks[0]?.content;
         }
 
         // 如果还是没有，就直接把此文档的标题作为title
-        if (!title.trim()) {
+        if (!title) {
             title = attr.title;
         }
         return {
@@ -155,8 +155,31 @@ export class Diary {
         };
     }
 
-    // 获取windows
-    test() {
-        console.log(window);
+    // 跳转到指定的diary
+    static gotoDiary(id) {
+        const main_window = window.document;
+        const virtual_link = main_window.createElement('a');
+        virtual_link.setAttribute('href', `siyuan://blocks/${id}`);
+        document.body.appendChild(virtual_link);
+        const click_event = main_window.createEvent('MouseEvents');
+        click_event.initMouseEvent(
+            'click',
+            true,
+            false,
+            window,
+            0,
+            0,
+            0,
+            0,
+            0,
+            false,
+            false,
+            false,
+            false,
+            0,
+            null,
+        );
+        virtual_link.dispatchEvent(click_event);
+        virtual_link.remove();
     }
 }

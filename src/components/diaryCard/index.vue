@@ -69,8 +69,9 @@ const diaryTitle = computed(() => {
 const clickFn = async () => {
     // 有id则打开该日记，无id则新建日记
     if (diaryIdObj.value[diaryDate.value]) {
+        Diary.gotoDiary(diaryIdObj.value[diaryDate.value]);
         // 打开该条日记
-        window.open(`siyuan://blocks/${diaryIdObj.value[diaryDate.value]}`);
+        // window.open(`siyuan://blocks/${diaryIdObj.value[diaryDate.value]}`);
     } else {
         // 新建日记
         let newDiaryId = '';
@@ -89,9 +90,10 @@ const clickFn = async () => {
 
         // 刷新列表
         await refreshDiaryList();
+        Diary.gotoDiary(newDiaryId);
 
         // 打开新建的日记
-        window.open(`siyuan://blocks/${newDiaryId}`);
+        // window.open(`siyuan://blocks/${newDiaryId}`);
     }
 };
 

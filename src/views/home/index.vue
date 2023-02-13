@@ -33,7 +33,7 @@ import { getWidgetBlockInfo } from '/@/utils';
 import { message } from 'ant-design-vue';
 import { usePublicStore } from '/@/store/modules/public';
 const publicStore = usePublicStore();
-const { refreshDiaryList, pushDiaryInitEvent } = publicStore;
+const { refreshDiaryList } = publicStore;
 
 const selectedDate = ref();
 const calenderRef = ref();
@@ -52,7 +52,7 @@ const panelChangeFn = (date: Dayjs) => {
 
 const init = async () => {
     // 读取配置信息
-    const { id, selectedNotebookId } = getWidgetBlockInfo();
+    const { selectedNotebookId } = getWidgetBlockInfo();
     if (selectedNotebookId) {
         // 选择了笔记本
     } else {

@@ -6,10 +6,10 @@
         </div>
         <!--      该日期有日记-->
         <div v-else class="has-diary">
-            <card-popover :title="title" :tags="tags">
-                <div :style="`${titleImgCSS}`">
+            <card-popover :title="title" :tags="tags" :updated="updated">
+                <div :style="`${titleImgCSS}`" class="truncate">
                     <emoji-icon :icon-unicode="icon"></emoji-icon>
-                    <span class="!truncate w-10rem">{{ diaryTitle }}</span>
+                    <span>{{ diaryTitle }}</span>
                 </div>
             </card-popover>
         </div>
@@ -101,6 +101,7 @@ const title = ref('');
 const tags = ref<string[]>([]);
 const icon = ref('');
 const titleImgPath = ref('');
+const updated = ref('');
 const init = async () => {
     title.value = '';
     if (diaryIdObj.value[diaryDate.value]) {
@@ -110,6 +111,7 @@ const init = async () => {
         titleImgCSS.value = diary.titleImgCSS;
         titleImgPath.value = diary.titleImgPath;
         icon.value = diary.icon;
+        updated.value = diary.updated;
     }
 };
 

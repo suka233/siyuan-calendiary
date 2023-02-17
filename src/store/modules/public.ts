@@ -6,24 +6,39 @@ import {
     listNotebook,
     IListNotebookResponse,
     ISQLAllDiaryResponse,
+    setBlockAttrs,
 } from '/@/api/public';
+import { getWidgetBlockInfo } from '/@/utils';
+import { message } from 'ant-design-vue';
 export const usePublicStore = defineStore('app-public', () => {
     // 挂件所在块id
     const blockID = ref<string>('');
     // 挂件默认查询的笔记本id
     const selectedNotebookId = ref<string>('');
+    const { id: _id, selectedNotebookId: _selectedNotebookId } =
+        getWidgetBlockInfo();
+    blockID.value = _id;
+    selectedNotebookId.value = _selectedNotebookId;
+    console.log('store', selectedNotebookId.value);
+
     // 笔记本下拉选项
     const notebookOptions = ref<any[]>([]);
     const refreshNotebookOptions = async () => {
         const res: IListNotebookResponse = await listNotebook().catch((e) => {
             console.log(e);
         });
+        notebookOptions.value = [];
         res.data.notebooks.forEach((item) => {
             notebookOptions.value.push({
                 label: item.name,
                 value: item.id,
             });
         });
+    };
+    // 设置挂件默认查询的笔记本id
+    const setSelectedNotebookId = (id: string) => {
+        selectedNotebookId.value = id;
+        saveUserConf();
     };
 
     // 所有的日记数据数组
@@ -46,6 +61,24 @@ export const usePublicStore = defineStore('app-public', () => {
             console.log(`同步用户数据失败${e}`);
         });
         diaryNoteSavePath.value = conf?.data?.conf?.dailyNoteSavePath || '';
+    };
+
+    // 保存用户配置到挂件所在的block上
+    const saveUserConf = async () => {
+        const userConf = {
+            id: blockID.value,
+            attrs: {
+                'custom-selected-notebook-id': selectedNotebookId.value,
+            },
+        };
+        await setBlockAttrs(userConf)
+            .then(() => {
+                message.success('用户配置已经自动保存成功啦');
+            })
+            .catch((e) => {
+                console.log(e);
+                message.error('保存用户配置失败');
+            });
     };
 
     // 已经渲染的日记init事件对象，方便按需刷新
@@ -115,5 +148,7 @@ export const usePublicStore = defineStore('app-public', () => {
         refreshDiaryInitEvent,
         blockID,
         selectedNotebookId,
+        notebookOptions,
+        setSelectedNotebookId,
     };
 });

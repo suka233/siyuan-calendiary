@@ -1,14 +1,32 @@
 <template>
     <a-popover>
         <template #title>
-            <p class="font-bold w-10rem truncate">
-                {{ props.title ? props.title : '暂无标题' }}
-            </p>
+            <div class="w-15rem text-center truncate font-bold">
+                <span :title="props.title ? props.title : '暂无标题'">
+                    {{ props.title ? props.title : '暂无标题' }}
+                </span>
+            </div>
         </template>
         <template #content>
-            <a-tag v-for="tag in props.tags" :key="tag" color="#108ee9"
-                >{{ tag }}
-            </a-tag>
+            <div class="w-15rem">
+                <!--              图片轮播区域-->
+                <!--              标签区域-->
+                <div>
+                    <div v-if="props.tags.length">
+                        <a-tag
+                            v-for="(tag, index) in props.tags"
+                            :key="index"
+                            color="#108ee9"
+                            >{{ tag }}
+                        </a-tag>
+                    </div>
+                    <span v-else class="text-gray-400">暂无标签哦...</span>
+                </div>
+                <!--              更新时间区域-->
+                <div class="text-gray-400 mt-2 italic">
+                    <span>更新于: {{ updatedDate }}</span>
+                </div>
+            </div>
         </template>
         <template v-for="k in Object.keys($slots)" #[k] :key="k">
             <slot :name="k"></slot>
@@ -31,10 +49,20 @@ export default {
 </script>
 
 <script setup lang="ts">
+import dayjs from 'dayjs';
+import { ref } from 'vue';
+
 const props = defineProps<{
     title: string;
     tags: string[];
+    /**
+     * 更新时间时间戳
+     */
+    updated: string;
 }>();
+console.log(props.updated);
+
+const updatedDate = ref(dayjs(props.updated).format('YYYY-MM-DD HH:mm:ss'));
 </script>
 
 <style scoped></style>

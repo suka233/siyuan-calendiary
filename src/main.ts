@@ -10,6 +10,7 @@ import {
     Popover,
     Drawer,
     Tag,
+    Select,
 } from 'ant-design-vue';
 import 'virtual:windi.css';
 createApp(App)
@@ -20,4 +21,5 @@ createApp(App)
     .use(Popover)
     .use(Drawer)
     .use(Tag)
+    .use(Select)
     .mount('#app');

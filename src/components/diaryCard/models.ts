@@ -25,8 +25,14 @@ export class Diary {
     icon: string;
     titleImgPath: string;
 
+    /**
+     * updated
+     */
+    updated: string;
+
     private constructor({ blocks, assets, attr }) {
         this.icon = attr.icon;
+        this.updated = attr.updated;
 
         const { tags } = Diary.getTags(blocks);
         this.tags = tags;
@@ -161,6 +167,7 @@ export class Diary {
     }
 
     // 跳转到指定的diary
+    // thanks @fatevase https://github.com/fatevase
     static gotoDiary(id) {
         if (window != window.parent) {
             const main_window = window.parent.document;

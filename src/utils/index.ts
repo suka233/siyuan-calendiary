@@ -28,7 +28,7 @@ export const getWidgetBlockInfo = (): IWidgetBlockAttr => {
     const blockNode = window.frameElement?.parentElement?.parentElement;
     const id = blockNode?.getAttribute('data-node-id') || '';
     const selectedNotebookId =
-        blockNode?.getAttribute('data-selected-notebook-id') || '';
+        blockNode?.getAttribute('custom-selected-notebook-id') || '';
 
     return {
         id,

@@ -8,8 +8,8 @@ dayjs.locale('zh-cn');
 
 <template>
     <a-config-provider :locale="zhCN">
-        <suspense><calendiary-home /> </suspense
-    ></a-config-provider>
+        <suspense> <calendiary-home /></suspense>
+    </a-config-provider>
 </template>
 
 <style scoped></style>
